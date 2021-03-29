@@ -12,6 +12,7 @@ class App extends React.Component {
 
     this.state= {
       title: "Multiple Universes Superheroes",
+      filteredHero:{},
       superheroLists : []
       
     }
@@ -42,6 +43,17 @@ class App extends React.Component {
     })
   }
 
+  filterHero = (searchName) => {
+    console.log(searchName,'searchname di filter hero app.js');
+    let filtered = this.state.superheroLists.filter((hero)=>{
+      return hero.name.toLowerCase() === searchName.toLowerCase()
+    })
+    this.setState({
+      ...this.state,
+      filteredHero: filtered
+    })
+  }
+
   componentDidMount(){
     this.getSeveralHeroes()
   }
@@ -51,7 +63,7 @@ class App extends React.Component {
     return (
       // harus satu lead tag ( sama seperti vue )
       <div>
-        <Navbar></Navbar>
+        <Navbar filterHero={this.filterHero}></Navbar>
         <h1 className="text-center my-5">{this.state.title}</h1>
         <div className="text-center my-5">
           <h3>Add Superhero</h3>

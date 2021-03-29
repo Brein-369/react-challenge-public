@@ -12,7 +12,20 @@ class Navbar extends Component {
 
     handleSearch = (event) =>{
         event.preventDefault()
+        console.log(this.state.inputSearch);
+        this.props.filterHero(this.state.inputSearch)
+        this.setState({
+            ...this.state,
+            inputSearch: ''
+        })
+    }
+
+    handleOnChange = (event) => {
         console.log(event.target.value);
+        this.setState({
+            ...this.state,
+            inputSearch: event.target.value
+        })
     }
 
     render() {
@@ -32,9 +45,9 @@ class Navbar extends Component {
                                 <a class="nav-link" href="#">Link</a>
                             </li>
                         </ul>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onSubmit={(event)=>this.handleSearch(event)}>Search</button>
+                        <form class="form-inline my-2 my-lg-0" onSubmit={(event)=>this.handleSearch(event)}>
+                            <input class="form-control mr-sm-2" name="inputSearch" type="search" value={this.state.inputSearch} onChange={this.handleOnChange} placeholder="Search by name" aria-label="Search" />
+                            <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
                         </form>
                     </div>
                 </nav>

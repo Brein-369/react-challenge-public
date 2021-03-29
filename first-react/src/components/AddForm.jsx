@@ -55,8 +55,7 @@ class AddForm extends Component {
     })
   }
 
-  getSuperheroFromApi = (id)=>{
-  }
+  
 
   render() {
     return (
