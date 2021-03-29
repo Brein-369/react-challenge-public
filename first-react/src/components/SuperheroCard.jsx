@@ -3,7 +3,7 @@ import React from 'react'
 class SuperheroCard extends React.Component {
     render(){
         const {superhero} = this.props
-        console.log(superhero);
+        console.log(superhero, 'di superhero card<<<<<<');
         return (
             // <> atau <React.Fragment> sama aja
             <>

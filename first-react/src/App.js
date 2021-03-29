@@ -52,7 +52,12 @@ class App extends React.Component {
       ...this.state,
       filteredHero: filtered
     })
+    console.log(this.state.filteredHero,'<<<<<<');
   }
+
+  // componentDidUpdate(){
+
+  // }
 
   componentDidMount(){
     this.getSeveralHeroes()
@@ -60,24 +65,38 @@ class App extends React.Component {
 
   render() {
     // const {users} = this.users
-    return (
-      // harus satu lead tag ( sama seperti vue )
-      <div>
-        <Navbar filterHero={this.filterHero}></Navbar>
-        <h1 className="text-center my-5">{this.state.title}</h1>
-        <div className="text-center my-5">
-          <h3>Add Superhero</h3>
-          <AddForm addSuperhero={this.addHero}></AddForm>
+    if (!this.state.filteredHero.length){
+      return (
+        // harus satu lead tag ( sama seperti vue )
+        <div>
+          <Navbar filterHero={this.filterHero}></Navbar>
+          <h1 className="text-center my-5">{this.state.title}</h1>
+          <div className="text-center my-5">
+            <h3>Add Superhero</h3>
+            <AddForm addSuperhero={this.addHero}></AddForm>
+          </div>
+          <div className="d-flex row justify-content-center mx-5">
+            {
+              this.state.superheroLists.map(superhero=>{
+                return <SuperheroCard superhero={superhero} key={superhero.id}></SuperheroCard>
+              })
+            }
+          </div>
         </div>
-        <div className="d-flex row justify-content-center mx-5">
-          {
-            this.state.superheroLists.map(superhero=>{
-              return <SuperheroCard superhero={superhero} key={superhero.id}></SuperheroCard>
-            })
-          }
+      )
+    }
+    else {
+      return (
+        // harus satu lead tag ( sama seperti vue )
+        <div>
+          <Navbar filterHero={this.filterHero}></Navbar>
+          <h1 className="text-center my-5">{this.state.title}</h1>
+          <div className="d-flex row justify-content-center mx-5">
+            <SuperheroCard superhero={this.state.filteredHero[0]} key={this.state.filteredHero[0].id}></SuperheroCard>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }  
 }
 
