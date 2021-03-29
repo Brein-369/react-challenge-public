@@ -1,53 +1,69 @@
-import logo from './logo.svg';
+
 import './App.css';
 // import react dulu kalo mau pake class component, pluss ganti languagenya jadi javascript react supaya tag html bisa dibuat di render
 import React from 'react'
-import Dictionary from './components/Dictionary'
-import UserForm from './components/UserForm'
+import SuperheroCard from './components/SuperheroCard'
+import AddForm from './components/AddForm'
+import Navbar from './components/Navbar'
 
 class App extends React.Component {
   constructor(props){
     super(props)
 
     this.state= {
-      name: "edward B",
-      users : [{
-        id: 1,
-        name: 'edward',
-        age: 10
-      },
-      {
-        id:2,
-        name: "bill",
-        age: 11
-      }
-      ]
+      title: "Multiple Universes Superheroes",
+      superheroLists : []
       
     }
   }
 
-  addUser = (user) =>{
-    let newData = this.state.users.concat(user)
+  addHero = (superhero) =>{
+    let newData = this.state.superheroLists.concat(superhero)
     this.setState({
       ...this.state,
-      users : newData
+      superheroLists : newData
     })
+  }
+
+  getSeveralHeroes = () =>{
+    fetch(`https://akabab.github.io/superhero-api/api/all.json`)
+    .then(res=>{
+      return res.json()
+    })
+    .then(res=>{
+      let severalHeroes = res.slice(0,5)
+      this.setState({
+        ...this.state,
+        superheroLists : severalHeroes
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
+  componentDidMount(){
+    this.getSeveralHeroes()
   }
 
   render() {
     // const {users} = this.users
     return (
-      // harus satu head tag ( sama seperti vue )
+      // harus satu lead tag ( sama seperti vue )
       <div>
-        <h1>{this.state.name}</h1>
-        <ul>
+        <Navbar></Navbar>
+        <h1 className="text-center my-5">{this.state.title}</h1>
+        <div className="text-center my-5">
+          <h3>Add Superhero</h3>
+          <AddForm addSuperhero={this.addHero}></AddForm>
+        </div>
+        <div className="d-flex row justify-content-center mx-5">
           {
-            this.state.users.map(user=>{
-              return <Dictionary user={user} key={user.id}></Dictionary>
+            this.state.superheroLists.map(superhero=>{
+              return <SuperheroCard superhero={superhero} key={superhero.id}></SuperheroCard>
             })
           }
-        </ul>
-        <UserForm addUser={this.addUser}></UserForm>
+        </div>
       </div>
     )
   }  
