@@ -7,6 +7,10 @@ function useFetch(url) {
 
     useEffect(() => {
         setLoading(true)
+        fetchAll()
+    }, [])
+
+    function fetchAll(){
         fetch(url)
         .then(res=>res.json())
         .then(res=>{
@@ -19,11 +23,13 @@ function useFetch(url) {
             console.log(data, 'data di use fetch');
             setLoading(false)
         })
-    }, [])
+    }
 
     return {
         data,
-        loading
+        loading,
+        fetchAll,
+        setData
     }
 }
 

@@ -12,25 +12,37 @@ import useFetch from '../src/helpers/hooks/useFetch'
 
 
 function App() {
-  // const {data: alljson, loading } = useFetch
+  const {data: superheroLists, loading, fetchAll, setData } = useFetch('https://akabab.github.io/superhero-api/api/all.json')
   const [title, setTitle] = useState('Multiple Universes Superheroes')
-  const [superheroLists, setSuperheroLists] = useState([])
+  // const [superheroLists, setSuperheroLists] = useState([])
   const [filteredHero, setFilteredHero] = useState([])
   const [superheroNames, setSuperheroNames] = useState([])
 
   useEffect(() => {
-    fetch(`https://akabab.github.io/superhero-api/api/all.json`)
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        let severalHeroes = res.slice(0, 5)
-        setSuperheroLists(severalHeroes)
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    let newData = superheroLists.slice(0,5)
+    console.log(newData);
+    setData(newData)
   }, [])
+
+  // function getAllHero(){
+  //   let newData = superheroLists.slice(0,5)
+  //   console.log(newData);
+  //   setData(newData)
+  // }
+
+  // useEffect(() => {
+  //   fetch(`https://akabab.github.io/superhero-api/api/all.json`)
+  //     .then(res => {
+  //       return res.json()
+  //     })
+  //     .then(res => {
+  //       let severalHeroes = res.slice(0, 5)
+  //       setSuperheroLists(severalHeroes)
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }, [])
 
   useEffect(() => {
     fetch(`https://akabab.github.io/superhero-api/api/all.json`)
@@ -62,7 +74,7 @@ function App() {
   }
 
   function addHero(superhero) {
-    setSuperheroLists(superheroLists.concat(superhero))
+    setData(superheroLists.concat(superhero))
   }
   
   // setelah dibuat conditional rendering bugnya menghilang...
