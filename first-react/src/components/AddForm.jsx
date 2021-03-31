@@ -102,7 +102,7 @@ function AddForm (props) {
         value={inputId} 
         type="number"
         onChange={handleOnChange}/>
-        <button className="btn btn-primary mx-2">Submit</button>
+        <button className="btn btn-success mx-2">Submit</button>
       </form>
     </div>
 
@@ -118,7 +118,7 @@ function AddForm (props) {
               })
             }
           </select>
-          <button className="btn btn-primary mt-2">Submit</button>
+          <button className="btn btn-success mt-2">Submit</button>
         </form>
         </div>
 

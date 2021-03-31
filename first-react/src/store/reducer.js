@@ -1,6 +1,9 @@
  
  const initialState= {
-     favorites: []
+     favorites: [],
+     allHeroes: [],
+     allHeroNames: [],
+     filteredHero:[]
  }
  
  
@@ -15,6 +18,19 @@
         })
         return {...state, favorites: newData}
     }
+    else if(type === "allHeroes/setHeroes"){
+        return {...state, allHeroes: payload}
+    }
+    else if(type === "allHeroes/addHero"){
+        return {...state, allHeroes: [...state.allHeroes, payload]}
+    }
+    else if(type === "allHeroNames/setHeroNames"){
+        return {...state, allHeroNames: payload}
+    }
+    else if(type === "filteredHero/setFilteredHero"){
+        return {...state, filteredHero: payload}
+    }
+
     return state
  }  
 

@@ -24,13 +24,13 @@ function SuperheroCard (props){
     return (
         // <> atau <React.Fragment> sama aja
         <>
-            <div className="card col-2 mx-3 my-3">
+            <div className="card col-2 mx-3 my-3 pt-3 border-dark">
                 <img className="card-img-top" src={superhero.images.sm} alt=""/>
                 <div className='card-body'>
                     <h5 className="card-title">{superhero.name}</h5>
-                    <p>Publisher: {superhero.biography.publisher}</p>
+                    <p><strong>Publisher:</strong> {superhero.biography.publisher}</p>
                     <div className="row">
-                        <button onClick={()=> toDetailHero(superhero.id)} className="btn btn-primary col">Detail</button>
+                        <button onClick={()=> toDetailHero(superhero.id)} className="btn btn-warning col">Detail</button>
                         {
                             isFavorite ?
                             <i class="fa fa-thumbs-down fa-2x col text-right" onClick={removeFromFavorites} aria-hidden="true"></i>

@@ -5,19 +5,26 @@ import Navbar from '../components/Navbar'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import useFetch from '../helpers/hooks/useFetch'
+import {useSelector, useDispatch} from 'react-redux'
+import {setAllHeroes, setAllHeroNames, setFilteredHero, addHero} from '../store/actions'
 
 
 function Home() {
+    const dispatch = useDispatch()
+    const allHeroes = useSelector(state => state.allHeroes)
+    const allHeroNames = useSelector(state => state.allHeroNames)
+    const filteredHero = useSelector(state => state.filteredHero)
     const { data, loading } = useFetch('https://akabab.github.io/superhero-api/api/all.json')
     const [title] = useState('Multiple Universes Superheroes')
-    const [superheroLists, setSuperheroLists] = useState([])
-    const [superheroNames, setSuperheroNames] = useState([])
-    const [filteredHero, setFilteredHero] = useState([])
+    // const [superheroLists, setSuperheroLists] = useState([])
+    // const [superheroNames, setSuperheroNames] = useState([])
+    // const [filteredHero, setFilteredHero] = useState([])
 
     useEffect(() => {
         let newData = data.slice(0, 5)
         console.log(newData, "<<<<<<< new data di app");
-        setSuperheroLists(newData)
+        // setSuperheroLists(newData)
+        dispatch(setAllHeroes(newData))
     }, [data])
 
     // useEffect(() => {
@@ -44,7 +51,8 @@ function Home() {
                 let severalNames = severalheroes.map(hero => {
                     return hero.name
                 })
-                setSuperheroNames(severalNames)
+                dispatch(setAllHeroNames(severalNames))
+                // setSuperheroNames(severalNames)
             })
             .catch(err => {
                 console.log(err);
@@ -53,26 +61,26 @@ function Home() {
 
     function filterHero(searchName) {
         console.log(searchName, 'searchname di filter hero app.js');
-        let filtered = superheroLists.filter((hero) => {
+        let filtered = allHeroes.filter((hero) => {
             return hero.name.toLowerCase() === searchName.toLowerCase()
         })
-        if (filtered) setFilteredHero(filtered)
+        if (filtered) dispatch(setFilteredHero(filtered))
         else {
-            setFilteredHero([])
+            dispatch(setFilteredHero([]))
             console.log(filteredHero, '<<<<<<');
         }
     }
 
-    function addHero(superhero) {
-        setSuperheroLists(superheroLists.concat(superhero))
+    function functionAddHero(superhero) {
+        dispatch(addHero(superhero))
     }
     return (
         <div>
             <Navbar filterHero={filterHero}></Navbar>
-            <h1 className="text-center my-5">{title}</h1>
-            <div className="text-center my-5">
+            <h1 className="text-center my-0 py-5 bg-warning">{title}</h1>
+            <div className="text-center my-5 ">
                 <h3>Add Superhero</h3>
-                <AddForm addSuperhero={addHero} superheroNames={superheroNames}></AddForm>
+                <AddForm addSuperhero={functionAddHero} superheroNames={allHeroNames}></AddForm>
             </div>
             <div className="d-flex row justify-content-center mx-5">
 
@@ -81,7 +89,7 @@ function Home() {
                     filteredHero[0] ?
                         <SuperheroCard superhero={filteredHero[0]} isFavorite={false} key={filteredHero[0].id}></SuperheroCard>
                         :
-                        superheroLists.map(superhero => {
+                        allHeroes.map(superhero => {
                             return <SuperheroCard superhero={superhero} isFavorite={false} key={superhero.id}></SuperheroCard>
                         })
                 }
