@@ -8,8 +8,8 @@ import useFetch from '../helpers/hooks/useFetch'
 
 
 function Home() {
-    const { data, loading, fetchAll } = useFetch('https://akabab.github.io/superhero-api/api/all.json')
-    const [title, setTitle] = useState('Multiple Universes Superheroes')
+    const { data, loading } = useFetch('https://akabab.github.io/superhero-api/api/all.json')
+    const [title] = useState('Multiple Universes Superheroes')
     const [superheroLists, setSuperheroLists] = useState([])
     const [superheroNames, setSuperheroNames] = useState([])
     const [filteredHero, setFilteredHero] = useState([])
@@ -79,10 +79,10 @@ function Home() {
                 {loading ?
                     <h1>LOADING</h1> :
                     filteredHero[0] ?
-                        <SuperheroCard superhero={filteredHero[0]} key={filteredHero[0].id}></SuperheroCard>
+                        <SuperheroCard superhero={filteredHero[0]} isFavorite={false} key={filteredHero[0].id}></SuperheroCard>
                         :
                         superheroLists.map(superhero => {
-                            return <SuperheroCard superhero={superhero} key={superhero.id}></SuperheroCard>
+                            return <SuperheroCard superhero={superhero} isFavorite={false} key={superhero.id}></SuperheroCard>
                         })
                 }
             </div>

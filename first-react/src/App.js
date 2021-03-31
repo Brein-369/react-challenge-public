@@ -12,21 +12,24 @@ import {
 
 import {
   Home,
-  Detail
-} from './pages'
+  Detail,
+  Favorites
+} from './pages/index.js'
 
 
 function App() {
   
   
-  // setelah dibuat conditional rendering bugnya menghilang...
   return (
     <Router>
       <Switch>
-        <Route path='/detail/:id'>
+        <Route path="/detail/:id">
           <Detail></Detail>
         </Route>
-        <Route path='/'>
+        <Route path="/favorites">
+          <Favorites></Favorites>
+        </Route>
+        <Route path="/">
           <Home></Home>
         </Route>
       </Switch>

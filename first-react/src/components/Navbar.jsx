@@ -1,5 +1,8 @@
-import React, { Component } from 'react'
+
 import {useState} from 'react'
+import {
+    Link
+} from 'react-router-dom'
 
 function Navbar(props) {
 
@@ -27,10 +30,10 @@ function Navbar(props) {
                     <h3 class="navbar-brand">Superheroes</h3>
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <Link to='/' class="nav-link" >Home</Link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <Link to='/favorites' class="nav-link" >Favorites</Link>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0" onSubmit={(event)=>handleSearch(event)}>

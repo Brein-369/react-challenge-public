@@ -28,8 +28,7 @@ function useFetch(url) {
 
     return {
         data,
-        loading,
-        fetchAll
+        loading
     }
 }
 
