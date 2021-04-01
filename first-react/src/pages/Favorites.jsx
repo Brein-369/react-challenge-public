@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Navbar from '../components/Navbar'
 
 function Favorites() {
-    const favorites = useSelector((state)=> state.favorites)
+    const favorites = useSelector((state)=> state.favorites.data)
     return (
         <div>
             <Navbar></Navbar>

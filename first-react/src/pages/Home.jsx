@@ -11,9 +11,9 @@ import {setAllHeroes, setAllHeroNames, setFilteredHero, addHero} from '../store/
 
 function Home() {
     const dispatch = useDispatch()
-    const allHeroes = useSelector(state => state.allHeroes)
-    const allHeroNames = useSelector(state => state.allHeroNames)
-    const filteredHero = useSelector(state => state.filteredHero)
+    const allHeroes = useSelector(state => state.heroes.allHeroes)
+    const allHeroNames = useSelector(state => state.heroes.allHeroNames)
+    const filteredHero = useSelector(state => state.heroes.filteredHero)
     const { data, loading } = useFetch('https://akabab.github.io/superhero-api/api/all.json')
     const [title] = useState('Multiple Universes Superheroes')
     // const [superheroLists, setSuperheroLists] = useState([])
