@@ -1,4 +1,5 @@
 const initialState={
+    loading: false,
     allHeroes: [],
     allHeroNames: [],
     filteredHero:[]
@@ -11,14 +12,7 @@ function reducer(state=initialState, action){
     }
     else if(type === "allHeroes/addHero"){
         console.log(payload, "payload di reducer<<<<<<");
-        // let doAdd = false
-        // state.allHeroes.forEach((e,i)=>{
-        //     if(e.id !== payload.id){
-        //         doAdd = true 
-        //     }
-        //     if (doAdd && i === state.allHeroes.length-1) return {...state, allHeroes: [...state.allHeroes, payload]}
-        //     if (!doAdd && i === state.allHeroes.length-1)return {...state, allHeroes: [...state.allHeroes]}
-        // })
+        
         return {...state, allHeroes: [...state.allHeroes, payload]}
         
     }
@@ -27,6 +21,9 @@ function reducer(state=initialState, action){
     }
     else if(type === "filteredHero/setFilteredHero"){
         return {...state, filteredHero: payload}
+    }
+    else if(type === "loading/setLoading"){
+        return {...state, loading: payload}
     }
     return state
 }

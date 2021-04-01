@@ -1,10 +1,22 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {setAllHeroNamesAsync, addHero} from '../store/actions/heroes'
 
 
+function AddForm () {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    // async function harus di invoke supaya mereturn sesuatu
+    dispatch(setAllHeroNamesAsync())
+  }, [])
 
-function AddForm (props) {
-  const {superheroNames} = props
+  const superheroNames = useSelector(state => state.heroes.allHeroNames)
+  
+  
+  //beberapa state saya buat lokal state aja gpp kan kak ? soalnya bisa dianggap ini belum fix
+  const [inputId, setInputId] = useState(undefined)
+  const [inputName, setInputName] = useState('')
   const [heroToAdd, setHeroToAdd] =  useState ({
     id : 0,
     name: "",
@@ -14,16 +26,12 @@ function AddForm (props) {
     biography: {
       publisher: ''
     }
-    
   })
-  const [inputId, setInputId] = useState(undefined)
-  const [inputName, setInputName] = useState('')
   
+  // kalo local state berubah waktu submit langsung proses dispatch add
   useEffect(()=>{
-    console.log(props);
-    const {addSuperhero} = props
-    console.log(heroToAdd, 'hero to add hooks<<<<');
-    addSuperhero(heroToAdd)
+    console.log(heroToAdd, 'hero to add hooks<<<<')
+    dispatch(addHero(heroToAdd))
   },[heroToAdd])
 
   function formOnSubmit(event){

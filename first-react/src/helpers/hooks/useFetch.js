@@ -1,35 +1,35 @@
-import {useState, useEffect} from 'react'
+// import {useState, useEffect} from 'react'
 
-function useFetch(url) {
+// function useFetch(url) {
     
-    const [data , setData] = useState([])
-    const [loading, setLoading] = useState(false)
+//     const [data , setData] = useState([])
+//     const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        setLoading(true)
-        fetchAll()
-    }, [])
+//     useEffect(() => {
+//         setLoading(true)
+//         fetchAll()
+//     }, [])
 
-    function fetchAll(){
-        fetch(url)
-        .then(res=>res.json())
-        .then(res=>{
-            setData(res)
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-        .finally(()=>{
-            console.log(data, 'data di use fetch');
-            setLoading(false)
-        })
-    }
+//     function fetchAll(){
+//         fetch(url)
+//         .then(res=>res.json())
+//         .then(res=>{
+//             setData(res)
+//         })
+//         .catch(err=>{
+//             console.log(err);
+//         })
+//         .finally(()=>{
+//             console.log(data, 'data di use fetch');
+//             setLoading(false)
+//         })
+//     }
 
 
-    return {
-        data,
-        loading
-    }
-}
+//     return {
+//         data,
+//         loading
+//     }
+// }
 
-export default useFetch
+// export default useFetch

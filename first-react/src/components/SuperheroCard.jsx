@@ -1,6 +1,6 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {addFavorite, removeFavorite} from '../store/actions'
+import {addFavorite, removeFavorite} from '../store/actions/favorites'
 import {useDispatch} from 'react-redux'
 
 function SuperheroCard (props){

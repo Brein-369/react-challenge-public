@@ -1,11 +1,13 @@
 
 import {useState} from 'react'
 import {
-    Link
+    Link,
+    useHistory
 } from 'react-router-dom'
 
-function Navbar(props) {
 
+function Navbar(props) {
+    const history = useHistory()
     const [inputSearch, setInputSearch] = useState('')
 
     function handleSearch(event){
@@ -19,6 +21,12 @@ function Navbar(props) {
         console.log(event.target.value);
         setInputSearch(event.target.value)
     }
+    function toHome () {
+        if(props.filterHero){
+            props.filterHero('')
+        }
+        history.push('/')
+    }
 
     return (
         <div>
@@ -30,14 +38,14 @@ function Navbar(props) {
                     <h3 className="navbar-brand">Superheroes</h3>
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li className="nav-item">
-                            <Link to='/' className="nav-link" >Home</Link>
+                            <a href='#' onClick={toHome} className="nav-link" >Home</a>
                         </li>
                         <li className="nav-item">
                             <Link to='/favorites' className="nav-link" >Favorites</Link>
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0" onSubmit={(event)=>handleSearch(event)}>
-                        <input className="form-control mr-sm-2" name="inputSearch" type="search" value={inputSearch} onChange={handleOnChange} placeholder="Search by name" aria-label="Search" />
+                        <input className="form-control mr-sm-2" name="inputSearch" type="search" value={inputSearch} onChange={handleOnChange} placeholder="Search empty to go Home" aria-label="Search" />
                         <button className="btn btn-outline-success my-2 my-sm-0" >Search</button>
                     </form>
                 </div>
