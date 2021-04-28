@@ -34,19 +34,20 @@ export function addHero(payload) {
 }
 
 // ga sempet perbaiki yang masih ada duplikat kak... 
-// export function addHeroAsync(dataHero) {
-//     return (dispatch, getState) => {
-//         let doAdd = false
-//         const {allHeroes} = getState()
-//         allHeroes.forEach((e,i)=>{
-//             if(e.id !== dataHero.id){
-//                 doAdd = true 
-//             }
-//             if (doAdd && i === allHeroes.length-1) dispatch(addHero(dataHero))
-//             if (!doAdd && i === allHeroes.length-1)return null
-//         })   
-//     }
-// }
+export function addHeroAsync(dataHero) {
+    return (dispatch, getState) => {
+        let doAdd = true
+        const {allHeroes} = getState().heroes
+
+        allHeroes.forEach((e,i)=>{
+            if(e.id === dataHero.id){
+                doAdd = false 
+            }
+            if (doAdd && i === allHeroes.length-1) dispatch(addHero(dataHero))
+            if (!doAdd && i === allHeroes.length-1)return null
+        })   
+    }
+}
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {setAllHeroNamesAsync, addHero} from '../store/actions/heroes'
+import {setAllHeroNamesAsync, addHero, addHeroAsync} from '../store/actions/heroes'
 
 
 function AddForm () {
@@ -31,7 +31,7 @@ function AddForm () {
   // kalo local state berubah waktu submit langsung proses dispatch add
   useEffect(()=>{
     console.log(heroToAdd, 'hero to add hooks<<<<')
-    dispatch(addHero(heroToAdd))
+    dispatch(addHeroAsync(heroToAdd))
   },[heroToAdd])
 
   function formOnSubmit(event){
@@ -85,6 +85,7 @@ function AddForm () {
       setHeroToAdd(newObj)
       console.log(newObj, 'new obj<<<<<2');
       setInputId(undefined)
+      
     })
     .catch(err=>{
       console.log(err);
@@ -106,7 +107,7 @@ function AddForm () {
         <input 
         id="byId"
         name="id"
-        placeholder='add superhero by id (1-731)' 
+        placeholder='add superhero by id (12-731)' 
         value={inputId} 
         type="number"
         onChange={handleOnChange}/>
